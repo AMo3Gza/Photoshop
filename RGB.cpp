@@ -107,7 +107,6 @@ void flipImage(){
 }
 
 
-
 // Mirror 1/2 Image - Filter
 void mirrorImage(){
     int choice,x=255;
@@ -176,7 +175,8 @@ int main(){
     if (loaded == 0)
         loadImage();
 
-    cout << "1- Black and White Image\n"
+    cout << "RGB Version \n"
+            "1- Black and White Image\n"
             "2- Invert Image\n"
             "3- Merge Images\n"
             "4- Flip Image\n"

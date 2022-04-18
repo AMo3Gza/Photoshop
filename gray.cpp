@@ -137,7 +137,6 @@ void darkenAndLightenImage(){
     cin >> choice;
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-
             if(choice == 1)
                 newImage[i][j] = (image[i][j])/2;
             else if (choice == 2)
@@ -147,28 +146,54 @@ void darkenAndLightenImage(){
     cout << "Done"<< endl;
 }
 
-// Detect Image Edges - Filter
-void detectImageEdges(){
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            if (image[i][j] > 127){
-                image[i][j] = 255;
-                newImage[i][j] = image[i][j];
-            }else{
-                image[i][j] = 0;
-                newImage[i][j] = image[i][j];
+// Rotate Image - Filter
+void rotateImage(){
+    int choice;
+    cout << "1- Rotate By 90\n"
+            "2- Rotate By 180\n"
+            "3- Rotate By 270\n";
+    cin >> choice;
+
+    if (choice == 1){
+        for (int i = 0; i < SIZE; i++){
+            for (int j = 255; j > 0; j--){
+                newImage[i][j] = image[j][-i];
             }
         }
-     }
-    for( int x = 0 ; x < SIZE ; x++ ){
-        for( int y = 0 ; y < SIZE ; y++ ){
-            if( newImage[x][y] == newImage[x+1][y+1] )
-                newImage[x][y] = 255 ;
-            else
-                newImage[x][y] = 0;
+    }else if (choice == 2){
+         int x = 255;
+         for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                newImage[x][j]= image[i][-j];
+            }
+            x--;
+        }
+    }else if (choice == 3){
+         for (int i = 0; i < SIZE; i++){
+            for (int j = 255; j > 0; j--){
+                newImage[i][j] = image[255-j][i-255];
+            }
+        }
+    }else{
+        cout << "Invalid input\n";
+        rotateImage();
+    }
+}
+
+// Detect Image Edges - Filter
+void detectImageEdges(){
+    blackAndWhite();
+    for (int i = 0 ; i < SIZE ; i ++){
+        for (int j = 0 ; j < SIZE ; j ++){
+            if (image[i][j] == image[i][j+1]){
+                newImage[i][j] = 255 ;
+            }else{
+                newImage[i][j] = 0 ;
+            }
         }
     }
 }
+
 
 // Mirror 1/2 Image - Filter
 void mirrorImage(){
@@ -221,7 +246,19 @@ void mirrorImage(){
     cout << "Done"<< endl;
 }
 
-
+// Blur Image - Filter
+void blurImage(){
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            newImage[i][j] = ((image[i][j])+(image[i-1][j-1])+(image[i-1][j])+(image[i-1][j+1])
+                    +(image[i][j-1])+(image[i][j+1])+(image[i+1][j-1])+(image[i+1][j])+(image[i+1][j+1])
+                    +(image[i-2][j-2])+(image[i-2][j-1])+(image[i-2+1][j])+(image[i-2][j+1])+(image[i-2][j+2])
+                    +(image[i-1][j-2])+(image[i-1][j+2])+(image[i][j-2])+(image[i][j+2])+(image[i+1][j-2])
+                    +(image[i+1][j+2])+(image[i+2][j-2])+(image[i+2][j-1])+(image[i+2][j])+(image[i+2][j+1])
+                    +(image[i+2][j+2]))/25;
+        }
+    }
+}
 
 // Main Menu
 int main(){
@@ -260,11 +297,26 @@ int main(){
     }else if (choice == '5'){
         darkenAndLightenImage();
         multiTask();
+    }else if (choice == '6'){
+        rotateImage();
+        multiTask();
     }else if (choice == '7'){
         detectImageEdges();
         multiTask();
+    }else if (choice == '8'){
+
+        multiTask();
+    }else if (choice == '9'){
+
+        multiTask();
     }else if (choice == 'a'){
         mirrorImage();
+        multiTask();
+    }else if (choice == 'b'){
+
+        multiTask();
+    }else if (choice == 'c'){
+        blurImage();
         multiTask();
     }else if (choice == '0'){
         saveImage();
