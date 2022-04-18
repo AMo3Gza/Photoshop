@@ -70,7 +70,7 @@ void blackAndWhite(){
             }
         }
      }
-    cout << "Done"<< endl;
+    cout << "Done  "<< endl;
 }
 
 // Invert Image - Filter
