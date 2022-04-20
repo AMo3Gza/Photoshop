@@ -73,6 +73,24 @@ void blackAndWhite(){
     cout << "Done"<< endl;
 }
 
+// Merge Images - Filter
+void Merge_Filter(){
+    unsigned char imageTwo[SIZE][SIZE][RGB];
+    char image2_file_name[100];
+    cout << "Enter the other Image File Name to merge : ";
+    cin >> image2_file_name;
+    strcat(image2_file_name, ".bmp");
+    readRGBBMP(image2_file_name, imageTwo);
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            for (int k = 0; k < RGB; k++) {
+                newImage[i][j][k] = (image[i][j][k] + imageTwo[i][j][k])/2;
+            }
+        }
+    }
+    cout << "Done "<< endl;
+}
+
 // Flip Image - Filter
 void flipImage(){
     int choice, x=255, y=255;
@@ -106,6 +124,24 @@ void flipImage(){
     cout << "Done "<< endl;
 }
 
+// Darken and Lighten Image - Filter
+void Darken_and_Lighten_Image(){
+    int choice;
+    cout << "1- Darken \n"
+            "2- Lighten" << endl;
+    cin >> choice;
+    for (int i = 0; i < SIZE; ++i) {
+        for (int j = 0; j < SIZE; ++j) {
+            for (int k = 0; k < RGB; ++k) {
+                if(choice == 1)
+                    newImage[i][j][k] = (image[i][j][k])/2;
+                else if (choice == 2)
+                    newImage[i][j][k] = (image[i][j][k])/2 + 127;
+            }
+        }
+    }
+    cout << "Done "<< endl;
+}
 
 // Mirror 1/2 Image - Filter
 void mirrorImage(){
@@ -168,6 +204,30 @@ void mirrorImage(){
     cout << "Done"<< endl;
 }
 
+// Blur Image - Filter
+void Blur_Image(){
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            for (int k = 0; k < RGB; ++k) {
+                newImage[i][j][k] = ((image[i][j][k]) + (image[i-1][j-1][k]) + (image[i-1][j][k]) + (image[i-1][j+1][k])
+                                     + (image[i][j-1][k]) + (image[i][j+1][k]) + (image[i+1][j-1][k]) + (image[i+1][j][k])
+                                     + (image[i+1][j+1][k]) + (image[i-2][j-2][k]) + (image[i-2][j-1][k]) + (image[i-2][j][k])
+                                     + (image[i-2][j+1][k]) + (image[i-2][j+2][k]) + (image[i-1][j-2][k]) + (image[i-1][j+2][k])
+                                     + (image[i][j-2][k]) + (image[i][j+2][k]) + (image[i+1][j-2][k]) + (image[i+1][j+2][k])
+                                     + (image[i+2][j-2][k]) + (image[i+2][j-1][k]) + (image[i+2][j][k]) + (image[i+2][j+1][k])
+                                     + (image[i+2][j+2][k]) + (image[i-3][j-3][k]) + (image[i-3][j-2][k]) + (image[i-3][j-1][k])
+                                     + (image[i-3][j][k]) + (image[i-3][j+1][k]) + (image[i-3][j+2][k]) + (image[i-3][j+3][k])
+                                     + (image[i-2][j-3][k]) + (image[i-2][j+3][k]) + (image[i-1][j-3][k]) + (image[i-1][j+3][k])
+                                     + (image[i][j-3][k]) + (image[i][j+3][k]) + (image[i+1][j-3][k]) + (image[i+1][j+3][k])
+                                     + (image[i+2][j-3][k]) + (image[i+2][j+3][k]) + (image[i+3][j-3][k]) + (image[i+3][j-2][k])
+                                     + (image[i+3][j-1][k]) +(image[i+3][j][k]) + (image[i+3][j+1][k]) + (image[i+3][j+2][k])
+                                     + (image[i+3][j+3][k])) / 49;
+            }
+        }
+    }
+    cout << "Done"<< endl;
+}
+
 // Main Menu
 int main(){
     char choice;
@@ -198,13 +258,13 @@ int main(){
 
         multiTask();
     }else if (choice == '3'){
-
+        Merge_Filter();
         multiTask();
     }else if (choice == '4'){
         flipImage();
         multiTask();
     }else if (choice == '5'){
-
+        Darken_and_Lighten_Image();
         multiTask();
     }else if (choice == '6'){
 
@@ -220,6 +280,12 @@ int main(){
         multiTask();
     }else if (choice == 'a'){
         mirrorImage();
+        multiTask();
+    }else if (choice == 'b'){
+
+        multiTask();
+    }else if (choice == 'c'){
+        Blur_Image();
         multiTask();
     }else if (choice == '0'){
         saveImage();
