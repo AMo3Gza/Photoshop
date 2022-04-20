@@ -7,7 +7,7 @@
 // Author2:  Malek Khaled Mohammed, 20210320 , A
 // Author3:  Ammar Ayman Mustafa, 20210253 , A
 // Section : S11,12
-// Date:    7 April 2022
+// Date:    20 April 2022
 // Version: 3.0
 
 #include <iostream>
@@ -191,16 +191,17 @@ void darkenAndLightenImage(){
     cout << "Done"<< endl;
 }
 
-
 // Detect Image Edges - Filter
 void detectImageEdges(){
     blackAndWhite();
-    for (int i = 0 ; i < SIZE ; i ++){
-        for (int j = 0 ; j < SIZE ; j ++){
-            if (image[i][j] == image[i][j+1]){
-                newImage[i][j] = 255 ;
-            }else{
-                newImage[i][j] = 0 ;
+    for(int i=0 ; i<SIZE ;i++){
+        for(int j=0 ;j<SIZE ;j++){
+            if (image[i][j]!=image[i+1][j+1]){
+                newImage[i][j]=0;
+            }
+            else if(image[i][j] == image[i+1][j+1]){
+                newImage[i][j]=255;
+
             }
         }
     }
@@ -276,6 +277,30 @@ void enlargeImage(){
     }
 }
 
+// Shrink Image - Filter
+void shrinkImage(){
+    int y = 0 , x = 0, choice, result;
+
+    cout << "1- 1/4\n"
+            "2- 1/2\n"
+            "3- 1/3" << endl;
+    cin >> choice;
+
+    if (choice == 1)
+        choice += 3;
+
+    result = SIZE / choice;
+    for (int i = 0 ; i < result ; i++){
+        for (int j = 0 ; j < result ; j++){
+            newImage[i][j] = image[y][x];
+            newImage[i][j] = image[y][x];
+            newImage[i][j] = image[y][x];
+            x += choice;
+        }
+        x = 1;
+        y += choice;
+    }
+}
 // Mirror 1/2 Image - Filter
 void mirrorImage(){
     int choice,x=255;
@@ -548,7 +573,7 @@ int main(){
         enlargeImage();
         multiTask();
     }else if (choice == '9'){
-
+        shrinkImage();
         multiTask();
     }else if (choice == 'a'){
         mirrorImage();

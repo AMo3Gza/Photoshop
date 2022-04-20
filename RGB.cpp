@@ -182,7 +182,7 @@ void rotateImage(){
 }
 
 // Darken and Lighten Image - Filter
-void Darken_and_Lighten_Image(){
+void darkenAndLightenImage(){
     int choice;
     cout << "1- Darken \n"
             "2- Lighten" << endl;
@@ -198,6 +198,24 @@ void Darken_and_Lighten_Image(){
         }
     }
     cout << "Done "<< endl;
+}
+
+// Detect Image Edges - Filter
+void detectImageEdges(){
+    blackAndWhite();
+    for(int i=0 ; i<SIZE ;i++){
+        for(int j=0 ;j<SIZE ;j++){
+             if(image[i][j][0] == image[i+1][j+1][0] && image[i][j][1] == image[i+1][j+1][1] && image[i][j][2] == image[i+1][j+1][2]){
+                newImage[i][j][0]=255;
+                newImage[i][j][1]=255;
+                newImage[i][j][2]=255;
+            }else{
+                newImage[i][j][0]=0;
+                newImage[i][j][1]=0;
+                newImage[i][j][2]=0;
+            }
+        }
+    }
 }
 
 // Enlarge Image - Filter
@@ -270,67 +288,6 @@ void enlargeImage(){
          }
     }
     cout << "Done" << endl;
-}
-
-// Mirror 1/2 Image - Filter
-void mirrorImage(){
-    int choice,x=255;
-    cout << "1- Left \n"
-            "2- Right \n"
-            "3- Upper \n"
-            "4- Lower \n";
-    cin >> choice;
-    if (choice == 1){
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < (SIZE/2); j++) {
-                for (int k =0; k< RGB; k++){
-                    newImage[i][j][k]= image[i][j][k];
-                    newImage[i][x][k]= image[i][j][k];
-                }
-                x--;
-                if (x==127)
-                    x+=(SIZE/2);
-            }
-        }
-    }
-    else if (choice == 2){
-        int y = (SIZE/2);
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = (SIZE/2); j <SIZE; j++) {
-                for (int k =0; k< RGB; k++){
-                    newImage[i][j][k]= image[i][j][k];
-                    newImage[i][y][k]= image[i][j][k];
-                }
-                y--;
-                if (y==0)
-                    y+=(SIZE/2);
-            }
-        }
-    }
-    else if (choice == 3){
-        for (int i = 0; i < (SIZE/2); i++){
-            for (int j = 0; j < SIZE; j++){
-                for (int k =0; k< RGB; k++){
-                    newImage[i][j][k]= image[i][j][k];
-                    newImage[x][j][k]= image[i][j][k];
-                }
-            }
-            x--;
-        }
-    }
-    else if (choice == 4){
-        int z =127;
-        for (int i = (SIZE/2); i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                for (int k =0; k< RGB; k++){
-                    newImage[i][j][k]= image[i][j][k];
-                    newImage[z][j][k]= image[i][j][k];
-                }
-            }
-            z--;
-        }
-    }
-    cout << "Done"<< endl;
 }
 
 // Shuffle Image - Filter
@@ -534,6 +491,94 @@ void shuffleImage(){
 
 }
 
+// Shrink Image - Filter
+void shrinkImage(){
+    int y = 0 , x = 0, choice, result;
+
+    cout << "1- 1/4\n"
+            "2- 1/2\n"
+            "3- 1/3" << endl;
+    cin >> choice;
+
+    if (choice == 1)
+        choice += 3;
+
+    result = SIZE / choice;
+    for (int i = 0 ; i < result ; i++){
+        for (int j = 0 ; j < result ; j++){
+            for (int k = 0 ; k < RGB ; k++){
+                newImage[i][j][k-2] = image[y][x][k-2];
+                newImage[i][j][k-1] = image[y][x][k-1];
+                newImage[i][j][k] = image[y][x][k];
+            }
+            x += choice;
+        }
+        x = 1;
+        y += choice;
+    }
+}
+
+// Mirror 1/2 Image - Filter
+void mirrorImage(){
+    int choice,x=255;
+    cout << "1- Left \n"
+            "2- Right \n"
+            "3- Upper \n"
+            "4- Lower \n";
+    cin >> choice;
+    if (choice == 1){
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < (SIZE/2); j++) {
+                for (int k =0; k< RGB; k++){
+                    newImage[i][j][k]= image[i][j][k];
+                    newImage[i][x][k]= image[i][j][k];
+                }
+                x--;
+                if (x==127)
+                    x+=(SIZE/2);
+            }
+        }
+    }
+    else if (choice == 2){
+        int y = (SIZE/2);
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = (SIZE/2); j <SIZE; j++) {
+                for (int k =0; k< RGB; k++){
+                    newImage[i][j][k]= image[i][j][k];
+                    newImage[i][y][k]= image[i][j][k];
+                }
+                y--;
+                if (y==0)
+                    y+=(SIZE/2);
+            }
+        }
+    }
+    else if (choice == 3){
+        for (int i = 0; i < (SIZE/2); i++){
+            for (int j = 0; j < SIZE; j++){
+                for (int k =0; k< RGB; k++){
+                    newImage[i][j][k]= image[i][j][k];
+                    newImage[x][j][k]= image[i][j][k];
+                }
+            }
+            x--;
+        }
+    }
+    else if (choice == 4){
+        int z =127;
+        for (int i = (SIZE/2); i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                for (int k =0; k< RGB; k++){
+                    newImage[i][j][k]= image[i][j][k];
+                    newImage[z][j][k]= image[i][j][k];
+                }
+            }
+            z--;
+        }
+    }
+    cout << "Done"<< endl;
+}
+
 // Blur Image - Filter
 void Blur_Image(){
     for (int i = 0; i < SIZE; i++) {
@@ -594,19 +639,19 @@ int main(){
         flipImage();
         multiTask();
     }else if (choice == '5'){
-        rotateImage
+        rotateImage();
         multiTask();
     }else if (choice == '6'){
-        Darken_and_Lighten_Image();
+        darkenAndLightenImage();
         multiTask();
     }else if (choice == '7'){
-
+        detectImageEdges();
         multiTask();
     }else if (choice == '8'){
         enlargeImage();
         multiTask();
     }else if (choice == '9'){
-
+        shrinkImage();
         multiTask();
     }else if (choice == 'a'){
         mirrorImage();
