@@ -70,7 +70,6 @@ void blackAndWhite(){
             }
         }
      }
-    cout << "Done  "<< endl;
 }
 
 // Invert Image - Filter
@@ -80,7 +79,6 @@ void invertImage(){
             newImage[i][j] = 255 - image[i][j];
         }
     }
-    cout << "Done"<< endl;
 }
 
 // Merge Images - Filter
@@ -98,7 +96,6 @@ void mergeImages(){
 
         }
     }
-    cout << "Done"<< endl;
 }
 
 // Flip Image - Filter
@@ -126,7 +123,6 @@ void flipImage(){
             }
         }
     }
-    cout << "Done"<< endl;
 }
 
 //Rotate Image - Filter
@@ -170,8 +166,6 @@ void rotateImage(){
         cout << "Invalid input\n";
         rotateImage();
     }
-
-    cout << "Done";
 }
 
 // Darken and Lighten Image - Filter
@@ -188,7 +182,6 @@ void darkenAndLightenImage(){
                 newImage[i][j] = ((image[i][j])/2)+ 127;
         }
     }
-    cout << "Done"<< endl;
 }
 
 // Detect Image Edges - Filter
@@ -301,6 +294,7 @@ void shrinkImage(){
         y += choice;
     }
 }
+
 // Mirror 1/2 Image - Filter
 void mirrorImage(){
     int choice,x=255;
@@ -349,7 +343,6 @@ void mirrorImage(){
             z--;
         }
     }
-    cout << "Done"<< endl;
 }
 
 // Shuffle Image - Filter
@@ -507,9 +500,6 @@ void shuffleImage(){
             }
         }
     }
-
-    cout << "Done" << endl;
-
 }
 
 // Blur Image - Filter
@@ -551,39 +541,51 @@ int main(){
     if (choice == '1'){
         blackAndWhite();
         multiTask();
+        cout << "Black and White Image Filter is Done"<< endl;
     }else if(choice == '2'){
         invertImage();
         multiTask();
+        cout << "Invert Image Filter is Done"<< endl;
     }else if (choice == '3'){
         mergeImages();
         multiTask();
+        cout << "Merge Images Filter is Done"<< endl;
     }else if (choice == '4'){
         flipImage();
         multiTask();
+        cout << "Flip Image Filter is Done"<< endl;
     }else if (choice == '5'){
         rotateImage();
         multiTask();
+        cout << "Rotate Image Filter is Done" << endl;
     }else if (choice == '6'){
         darkenAndLightenImage();
         multiTask();
+        cout << "Darken and Lighten Image Filter is Done"<< endl;
     }else if (choice == '7'){
         detectImageEdges();
         multiTask();
+        cout << "Detect Image Edges Filter is Done" << endl;
     }else if (choice == '8'){
         enlargeImage();
         multiTask();
+        cout << "Enlarge Image Filter is Done" << endl;
     }else if (choice == '9'){
         shrinkImage();
         multiTask();
+        cout << "Shrink Image Filter is Done" << endl;
     }else if (choice == 'a'){
         mirrorImage();
         multiTask();
+        cout << "Mirror 1/2 Image Filter is Done"<< endl;
     }else if (choice == 'b'){
         shuffleImage();
         multiTask();
+        cout << "Shuffle Image Filter is Done" << endl;
     }else if (choice == 'c'){
         blurImage();
         multiTask();
+        cout << "Blur Image Filter is Done" << endl;
     }else if (choice == '0'){
         saveImage();
         multiTask();
