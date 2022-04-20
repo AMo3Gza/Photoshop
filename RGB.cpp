@@ -1,14 +1,14 @@
-// Program: demo2.cpp
+// Program: Colored_Images Filters_Bouns.cpp
 // Purpose: Demonstrate use of bmplip for handling
 //          bmp colored and grayscale images
-//          Program load a gray image and store in another file
-//          6 Filters
+//          Program load a colored image and store in another file
+//          12 Filters
 // Author1:  Ayman Ashraf , 20210079 , A
-// Author2:  Malek Khaled mohammed, 20210320 , A
-// Author3:  Ammar Ayman mustafa, 20210253 , A
+// Author2:  Malek Khaled Mohammed, 20210320 , A
+// Author3:  Ammar Ayman Mustafa, 20210253 , A
 // Section : S11,12
-// Date:    7 April 2022
-// Version: 1.0
+// Date:    20 April 2022
+// Version: 2.0
 
 #include <iostream>
 #include <fstream>
@@ -73,8 +73,20 @@ void blackAndWhite(){
     cout << "Done"<< endl;
 }
 
+// Invert Image - Filter
+void invertImage(){
+    for (int i = 0; i < SIZE; i++){
+        for (int j = 0; j < SIZE; j++){
+            for (int k = 0; k < RGB; k++){
+                newImage[i][j][k] = 255 - image[i][j][k];
+            }
+        }
+    }
+    cout << "Done" << endl;
+}
+
 // Merge Images - Filter
-void Merge_Filter(){
+void mergeImages(){
     unsigned char imageTwo[SIZE][SIZE][RGB];
     char image2_file_name[100];
     cout << "Enter the other Image File Name to merge : ";
@@ -124,6 +136,51 @@ void flipImage(){
     cout << "Done "<< endl;
 }
 
+// Rotate Image - Filter
+void rotateImage(){
+    int rotate_input;
+
+    cout << "1- Rotate By a 90\n"
+            "2- Rotate By a 180\n"
+            "3- Rotate By a 270\n";
+    cin >> rotate_input;
+
+    if (rotate_input == 1){
+        for (int i = 0; i < SIZE; i++){
+            for (int j = 255; j > 0; j--){
+                for (int k = 0; k < RGB; k++){
+                    newImage[i][j][k] = image[j][-i][k];
+                }
+            }
+        }
+
+
+    }
+
+    if (rotate_input == 2){
+         int x = 255;
+         for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+               for (int k = 0; k < RGB; k++){
+                   newImage[x][j][k]= image[i][-j][k];
+               }
+            }
+            x--;
+        }
+    }
+
+    if (rotate_input == 3){
+         for (int i = 0; i < SIZE; i++){
+            for (int j = 255; j > 0; j--){
+                for (int k = 0; k < RGB; k++){
+                    newImage[i][j][k] = image[255 - j][i - 255][k];
+                }
+            }
+        }
+    }
+    cout << "Done" << endl;
+}
+
 // Darken and Lighten Image - Filter
 void Darken_and_Lighten_Image(){
     int choice;
@@ -141,6 +198,78 @@ void Darken_and_Lighten_Image(){
         }
     }
     cout << "Done "<< endl;
+}
+
+// Enlarge Image - Filter
+void enlargeImage(){
+    int enlarge_input;
+    cout << "1- Enlarge 1st Quarter \n"
+            "2- Enlarge 2nd Quarter \n"
+            "3- Enlarge 3rd Quarter \n"
+            "4- Enlarge 4th Quarter \n";
+    cin >> enlarge_input;
+
+    if (enlarge_input == 1){
+         for (int i = 0; i < 127; i++){
+
+             for (int j = 0; j < 127; j++){
+                 for (int k = 0; k < RGB; k++){
+                 newImage[2 * i][2 * j][k] = image[i][j][k];
+                 newImage[2 * i][2 * j + 1][k] = image[i][j][k];
+                 newImage[2 * i + 1][2 * j][k] = image[i][j][k];
+                 newImage[2 * i + 1][2 * j + 1][k] = image[i][j][k];
+                 }
+             }
+         }
+    }
+
+    if (enlarge_input == 2){
+        for (int i = 0; i < 127; i++){
+
+             for (int j = 127; j < 255; j++){
+                 for (int k = 0; k < RGB; k++){
+                 newImage[2 * i][2 * j][k] = image[i][j][k];
+                 newImage[2 * i][2 * j + 1][k] = image[i][j][k];
+                 newImage[2 * i + 1][2 * j][k] = image[i][j][k];
+                 newImage[2 * i + 1][2 * j + 1][k] = image[i][j][k];
+                 }
+             }
+
+         }
+    }
+
+    if (enlarge_input == 3){
+        for (int i = 127; i < 255; i++){
+
+             for (int j = 0; j < 127; j++){
+                 for (int k = 0; k < RGB; k++){
+                 image[2 * i][2 * j][k] = image[i][j][k];
+                 image[2 * i][2 * j + 1][k] = image[i][j][k];
+                 image[2 * i + 1][2 * j][k] = image[i][j][k];
+                 image[2 * i + 1][2 * j + 1][k] = image[i][j][k];
+                 }
+
+             }
+
+         }
+    }
+
+    if (enlarge_input == 4){
+        for (int i = 127; i < 255; i++){
+
+             for (int j = 127; j < 255; j++){
+                 for (int k = 0; k < RGB; k++){
+                 image[2 * i][2 * j][k] = image[i][j][k];
+                 image[2 * i][2 * j + 1][k] = image[i][j][k];
+                 image[2 * i + 1][2 * j][k] = image[i][j][k];
+                 image[2 * i + 1][2 * j + 1][k] = image[i][j][k];
+                 }
+
+             }
+
+         }
+    }
+    cout << "Done" << endl;
 }
 
 // Mirror 1/2 Image - Filter
@@ -204,6 +333,207 @@ void mirrorImage(){
     cout << "Done"<< endl;
 }
 
+// Shuffle Image - Filter
+void shuffleImage(){
+
+    unsigned char first_qrt[SIZE/2][SIZE/2][RGB], second_qrt[SIZE/2][SIZE/2][RGB];
+    unsigned char third_qrt[SIZE/2][SIZE/2][RGB], fourth_qrt[SIZE/2][SIZE/2][RGB];
+
+    for (int i = 0; i < SIZE/2; i++){
+        for (int j = 0; j < SIZE/2; j++){
+            for (int k = 0; k < RGB; k++){
+                first_qrt[i][j][k] = image[i][j][k];
+            }
+        }
+    }
+    for (int i = 0, x = 0; i < SIZE/2; i++, x++){
+        for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
+             for (int k = 0; k < RGB; k++){
+                second_qrt[x][y][k] = image[i][j][k];
+            }
+        }
+    }
+    for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
+        for (int j = 0, y = 0; j < SIZE/2; j++, y++){
+             for (int k = 0; k < RGB; k++){
+                third_qrt[x][y][k] = image[i][j][k];
+            }
+        }
+    }
+    for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
+        for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
+             for (int k = 0; k < RGB; k++){
+                fourth_qrt[x][y][k] = image[i][j][k];
+            }
+        }
+    }
+
+    int qrt1_pos, qrt2_pos, qrt3_pos, qrt4_pos;
+
+    cout << "First Quarter Position: ";
+    cin >> qrt1_pos;
+
+    cout << "Second Quarter Position: ";
+    cin >> qrt2_pos;
+
+    cout << "Third Quarter Position: ";
+    cin >> qrt3_pos;
+
+    cout << "Fourth Quarter Position: ";
+    cin >> qrt4_pos;
+
+    if (qrt1_pos == 1){
+        for (int i = 0, x = 0; i < SIZE/2; i++, x++){
+            for (int j = 0, y = 0; j < SIZE/2; j++, y++){
+                for (int k = 0; k < RGB; k++){
+                    newImage[i][j][k] = first_qrt[x][y][k];
+                }
+            }
+        }
+    }
+    if (qrt1_pos == 2){
+        for (int i = 0, x = 0; i < SIZE/2; i++, x++){
+            for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
+                for (int k = 0; k < RGB; k++){
+                    newImage[i][j][k] = first_qrt[x][y][k];
+                }
+            }
+        }
+    }
+    if (qrt1_pos == 3){
+        for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
+            for (int j = 0, y = 0; j < SIZE/2; j++, y++){
+                for (int k = 0; k < RGB; k++){
+                    newImage[i][j][k] = first_qrt[x][y][k];
+                }
+            }
+        }
+    }
+    if (qrt1_pos == 4){
+        for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
+             for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
+                for (int k = 0; k < RGB; k++){
+                    newImage[i][j][k] = first_qrt[x][y][k];
+                }
+            }
+        }
+    }
+
+    if (qrt2_pos == 1){
+        for (int i = 0, x = 0; i < SIZE/2; i++, x++){
+            for (int j = 0, y = 0; j < SIZE/2; j++, y++){
+                for (int k = 0; k < RGB; k++){
+                    newImage[i][j][k] = second_qrt[x][y][k];
+                }
+            }
+        }
+    }
+    if (qrt2_pos == 2){
+        for (int i = 0, x = 0; i < SIZE/2; i++, x++){
+            for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
+                for (int k = 0; k < RGB; k++){
+                    newImage[i][j][k] = second_qrt[x][y][k];
+                }
+            }
+        }
+    }
+    if (qrt2_pos == 3){
+        for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
+            for (int j = 0, y = 0; j < SIZE/2; j++, y++){
+                for (int k = 0; k < RGB; k++){
+                    newImage[i][j][k] = second_qrt[x][y][k];
+                }
+            }
+        }
+    }
+    if (qrt2_pos == 4){
+        for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
+             for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
+                for (int k = 0; k < RGB; k++){
+                    newImage[i][j][k] = second_qrt[x][y][k];
+                }
+            }
+        }
+    }
+
+    if (qrt3_pos == 1){
+        for (int i = 0, x = 0; i < SIZE/2; i++, x++){
+            for (int j = 0, y = 0; j < SIZE/2; j++, y++){
+                for (int k = 0; k < RGB; k++){
+                    newImage[i][j][k] = third_qrt[x][y][k];
+                }
+            }
+        }
+    }
+    if (qrt3_pos == 2){
+        for (int i = 0, x = 0; i < SIZE/2; i++, x++){
+            for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
+                for (int k = 0; k < RGB; k++){
+                    newImage[i][j][k] = third_qrt[x][y][k];
+                }
+            }
+        }
+    }
+    if (qrt3_pos == 3){
+        for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
+            for (int j = 0, y = 0; j < SIZE/2; j++, y++){
+                for (int k = 0; k < RGB; k++){
+                    newImage[i][j][k] = third_qrt[x][y][k];
+                }
+            }
+        }
+    }
+    if (qrt3_pos == 4){
+        for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
+             for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
+                for (int k = 0; k < RGB; k++){
+                    newImage[i][j][k] = third_qrt[x][y][k];
+                }
+            }
+        }
+    }
+
+    if (qrt4_pos == 1){
+        for (int i = 0, x = 0; i < SIZE/2; i++, x++){
+            for (int j = 0, y = 0; j < SIZE/2; j++, y++){
+                for (int k = 0; k < RGB; k++){
+                    newImage[i][j][k] = fourth_qrt[x][y][k];
+                }
+            }
+        }
+    }
+    if (qrt4_pos == 2){
+        for (int i = 0, x = 0; i < SIZE/2; i++, x++){
+            for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
+                for (int k = 0; k < RGB; k++){
+                    newImage[i][j][k] = fourth_qrt[x][y][k];
+                }
+            }
+        }
+    }
+    if (qrt4_pos == 3){
+        for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
+            for (int j = 0, y = 0; j < SIZE/2; j++, y++){
+                for (int k = 0; k < RGB; k++){
+                    newImage[i][j][k] = fourth_qrt[x][y][k];
+                }
+            }
+        }
+    }
+    if (qrt4_pos == 4){
+        for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
+             for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
+                for (int k = 0; k < RGB; k++){
+                    newImage[i][j][k] = fourth_qrt[x][y][k];
+                }
+            }
+        }
+    }
+
+    cout << "Done" << endl;
+
+}
+
 // Blur Image - Filter
 void Blur_Image(){
     for (int i = 0; i < SIZE; i++) {
@@ -240,8 +570,8 @@ int main(){
             "2- Invert Image\n"
             "3- Merge Images\n"
             "4- Flip Image\n"
-            "5- Darken and Lighten Image \n"
-            "6- Rotate Image\n"
+            "5- Rotate Image\n"
+            "6- Darken and Lighten Image\n"
             "7- Detect Image Edges\n"
             "8- Enlarge Image\n"
             "9- Shrink Image\n"
@@ -255,25 +585,25 @@ int main(){
         blackAndWhite();
         multiTask();
     }else if(choice == '2'){
-
+        invertImage();
         multiTask();
     }else if (choice == '3'){
-        Merge_Filter();
+        mergeImages();
         multiTask();
     }else if (choice == '4'){
         flipImage();
         multiTask();
     }else if (choice == '5'){
-        Darken_and_Lighten_Image();
+        rotateImage
         multiTask();
     }else if (choice == '6'){
-
+        Darken_and_Lighten_Image();
         multiTask();
     }else if (choice == '7'){
 
         multiTask();
     }else if (choice == '8'){
-
+        enlargeImage();
         multiTask();
     }else if (choice == '9'){
 
@@ -282,7 +612,7 @@ int main(){
         mirrorImage();
         multiTask();
     }else if (choice == 'b'){
-
+        shuffleImage();
         multiTask();
     }else if (choice == 'c'){
         Blur_Image();
@@ -298,4 +628,5 @@ int main(){
     main();
     return 0;
 }
+
 
