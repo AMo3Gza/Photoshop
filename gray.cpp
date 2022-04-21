@@ -187,17 +187,15 @@ void darkenAndLightenImage(){
 // Detect Image Edges - Filter
 void detectImageEdges(){
     blackAndWhite();
+    multiTask();
     for(int i=0 ; i<SIZE ;i++){
         for(int j=0 ;j<SIZE ;j++){
-            if (image[i][j]!=image[i+1][j+1]){
-                newImage[i][j]=0;
-            }
-            else if(image[i][j] == image[i+1][j+1]){
-                newImage[i][j]=255;
+            newImage[i][j] = image[i+1][j] + image[i][j+1] + image[i-1][j]+ image[i][j-1] - 4*(image[i][j]);
 
-            }
         }
     }
+    multiTask();
+    invertImage2();
 }
 
 //Enlarge Image - Filter
