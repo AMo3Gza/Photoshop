@@ -141,9 +141,7 @@ void rotateImage(){
                 newImage[i][j] = image[j][-i];
             }
         }
-    }
-
-    if (rotate_input == 2){
+    }else if (rotate_input == 2){
          int x = 255;
          for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
@@ -151,9 +149,7 @@ void rotateImage(){
             }
             x--;
         }
-    }
-
-    if (rotate_input == 3){
+    }else if (rotate_input == 3){
          for (int i = 0; i < SIZE; i++){
 
             for (int j = 255; j > 0; j--){
@@ -186,13 +182,11 @@ void detectImageEdges(){
     for(int i=0 ; i<SIZE ;i++){
         for(int j=0 ;j<SIZE ;j++){
             newImage[i][j] = image[i+1][j] + image[i][j+1] + image[i-1][j]+ image[i][j-1] - 4*(image[i][j]);
-
         }
     }
     multiTask();
     invertImage();
 }
-
 
 //Enlarge Image - Filter
 void enlargeImage(){
@@ -204,9 +198,9 @@ void enlargeImage(){
     cin >> enlarge_input;
 
     if (enlarge_input == 1){
-         for (int i = 0; i < 127; i++){
+         for (int i = 0; i < 128; i++){
 
-             for (int j = 0; j < 127; j++){
+             for (int j = 0; j < 128; j++){
                  if (i > 0){
                  newImage[2 * i][2 * j] = image[i][j];
                  newImage[2 * i][2 * j + 1] = image[i][j];
@@ -215,49 +209,34 @@ void enlargeImage(){
                 }
              }
          }
-    }
-
-    if (enlarge_input == 2){
-        for (int i = 0; i < 127; i++){
-
-             for (int j = 127; j < 255; j++){
+    }else if (enlarge_input == 2){
+        for (int i = 0; i < 128; i++){
+             for (int j = 128; j < 256; j++){
                  newImage[2 * i][2 * j] = image[i][j];
                  newImage[2 * i][2 * j + 1] = image[i][j];
                  newImage[2 * i + 1][2 * j] = image[i][j];
                  newImage[2 * i + 1][2 * j + 1] = image[i][j];
              }
-
          }
-    }
-
-    if (enlarge_input == 3){
-        for (int i = 127; i < 255; i++){
-
-             for (int j = 0; j < 127; j++){
+    }else if (enlarge_input == 3){
+        for (int i = 128; i < 256; i++){
+             for (int j = 0; j < 128; j++){
                  image[2 * i][2 * j] = image[i][j];
                  image[2 * i][2 * j + 1] = image[i][j];
                  image[2 * i + 1][2 * j] = image[i][j];
                  image[2 * i + 1][2 * j + 1] = image[i][j];
-
              }
-
          }
-    }
-
-    if (enlarge_input == 4){
-        for (int i = 127; i < 255; i++){
-
-             for (int j = 127; j < 255; j++){
+    }else if (enlarge_input == 4){
+        for (int i = 127; i < 256; i++){
+             for (int j = 128; j < 256; j++){
                  image[2 * i][2 * j] = image[i][j];
                  image[2 * i][2 * j + 1] = image[i][j];
                  image[2 * i + 1][2 * j] = image[i][j];
                  image[2 * i + 1][2 * j + 1] = image[i][j];
-
              }
-
-         }
+        }
     }
-
 }
 
 // Shrink Image - Filter
@@ -302,8 +281,7 @@ void mirrorImage(){
                     x+=(SIZE/2);
             }
         }
-    }
-    else if (choice == 2){
+    }else if (choice == 2){
         int y = (SIZE/2);
         for (int i = 0; i < SIZE; i++) {
             for (int j = (SIZE/2); j <SIZE; j++) {
@@ -313,8 +291,7 @@ void mirrorImage(){
                     y+=(SIZE/2);
             }
         }
-    }
-    else if (choice == 3){
+    }else if (choice == 3){
         for (int i = 0; i < (SIZE/2); i++) {
             for (int j = 0; j < SIZE; j++) {
                 newImage[i][j]= image[i][j];
@@ -322,8 +299,7 @@ void mirrorImage(){
             }
             x--;
         }
-    }
-    else if (choice == 4){
+    }else if (choice == 4){
         int z =127;
         for (int i = (SIZE/2); i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
@@ -381,22 +357,19 @@ void shuffleImage(){
                 newImage[i][j] = first_qrt[x][y];
             }
         }
-    }
-    if (qrt1_pos == 2){
+    }else if (qrt1_pos == 2){
         for (int i = 0, x = 0; i < SIZE/2; i++, x++){
             for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
                 newImage[i][j] = first_qrt[x][y];
             }
         }
-    }
-    if (qrt1_pos == 3){
+    }else if (qrt1_pos == 3){
         for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
             for (int j = 0, y = 0; j < SIZE/2; j++, y++){
                 newImage[i][j] = first_qrt[x][y];
             }
         }
-    }
-    if (qrt1_pos == 4){
+    }else if (qrt1_pos == 4){
         for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
              for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
                 newImage[i][j] = first_qrt[x][y];
@@ -410,22 +383,19 @@ void shuffleImage(){
                 newImage[i][j] = second_qrt[x][y];
             }
         }
-    }
-    if (qrt2_pos == 2){
+    }else if (qrt2_pos == 2){
         for (int i = 0, x = 0; i < SIZE/2; i++, x++){
             for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
                 newImage[i][j] = second_qrt[x][y];
             }
         }
-    }
-    if (qrt2_pos == 3){
+    }else if (qrt2_pos == 3){
         for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
             for (int j = 0, y = 0; j < SIZE/2; j++, y++){
                 newImage[i][j] = second_qrt[x][y];
             }
         }
-    }
-    if (qrt2_pos == 4){
+    }else if (qrt2_pos == 4){
         for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
              for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
                 newImage[i][j] = second_qrt[x][y];
@@ -439,22 +409,19 @@ void shuffleImage(){
                 newImage[i][j] = third_qrt[x][y];
             }
         }
-    }
-    if (qrt3_pos == 2){
+    }else if (qrt3_pos == 2){
         for (int i = 0, x = 0; i < SIZE/2; i++, x++){
             for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
                 newImage[i][j] = third_qrt[x][y];
             }
         }
-    }
-    if (qrt3_pos == 3){
+    }else if (qrt3_pos == 3){
         for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
             for (int j = 0, y = 0; j < SIZE/2; j++, y++){
                 newImage[i][j] = third_qrt[x][y];
             }
         }
-    }
-    if (qrt3_pos == 4){
+    }else if (qrt3_pos == 4){
         for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
              for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
                 newImage[i][j] = third_qrt[x][y];
@@ -468,22 +435,19 @@ void shuffleImage(){
                 newImage[i][j] = fourth_qrt[x][y];
             }
         }
-    }
-    if (qrt4_pos == 2){
+    }else if (qrt4_pos == 2){
         for (int i = 0, x = 0; i < SIZE/2; i++, x++){
             for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
                 newImage[i][j] = fourth_qrt[x][y];
             }
         }
-    }
-    if (qrt4_pos == 3){
+    }else if (qrt4_pos == 3){
         for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
             for (int j = 0, y = 0; j < SIZE/2; j++, y++){
                 newImage[i][j] = fourth_qrt[x][y];
             }
         }
-    }
-    if (qrt4_pos == 4){
+    }else if (qrt4_pos == 4){
         for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
              for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
                 newImage[i][j] = fourth_qrt[x][y];

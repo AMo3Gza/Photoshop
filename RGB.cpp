@@ -153,9 +153,7 @@ void rotateImage(){
                 }
             }
         }
-    }
-
-    if (rotate_input == 2){
+    }else if (rotate_input == 2){
          int x = 255;
          for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
@@ -165,9 +163,7 @@ void rotateImage(){
             }
             x--;
         }
-    }
-
-    if (rotate_input == 3){
+    }else if (rotate_input == 3){
          for (int i = 0; i < SIZE; i++){
             for (int j = 255; j > 0; j--){
                 for (int k = 0; k < RGB; k++){
@@ -204,7 +200,6 @@ void detectImageEdges(){
         for(int j=0 ;j<SIZE ;j++){
             for (int k = 0; k < RGB; ++k) {
                 newImage[i][j][k] = image[i+1][j][k] + image[i][j+1][k] + image[i-1][j][k] + image[i][j-1][k] - 4*(image[i][j][k]);
-
             }
         }
     }
@@ -222,9 +217,8 @@ void enlargeImage(){
     cin >> enlarge_input;
 
     if (enlarge_input == 1){
-         for (int i = 0; i < 127; i++){
-
-             for (int j = 0; j < 127; j++){
+         for (int i = 0; i < 128; i++){
+             for (int j = 0; j < 128; j++){
                  for (int k = 0; k < RGB; k++){
                  newImage[2 * i][2 * j][k] = image[i][j][k];
                  newImage[2 * i][2 * j + 1][k] = image[i][j][k];
@@ -233,12 +227,9 @@ void enlargeImage(){
                  }
              }
          }
-    }
-
-    if (enlarge_input == 2){
-        for (int i = 0; i < 127; i++){
-
-             for (int j = 127; j < 255; j++){
+    }else if (enlarge_input == 2){
+        for (int i = 0; i < 128; i++){
+             for (int j = 128; j < 256; j++){
                  for (int k = 0; k < RGB; k++){
                  newImage[2 * i][2 * j][k] = image[i][j][k];
                  newImage[2 * i][2 * j + 1][k] = image[i][j][k];
@@ -248,12 +239,9 @@ void enlargeImage(){
              }
 
          }
-    }
-
-    if (enlarge_input == 3){
-        for (int i = 127; i < 255; i++){
-
-             for (int j = 0; j < 127; j++){
+    }else if (enlarge_input == 3){
+        for (int i = 128; i < 256; i++){
+             for (int j = 0; j < 128; j++){
                  for (int k = 0; k < RGB; k++){
                  image[2 * i][2 * j][k] = image[i][j][k];
                  image[2 * i][2 * j + 1][k] = image[i][j][k];
@@ -264,12 +252,9 @@ void enlargeImage(){
              }
 
          }
-    }
-
-    if (enlarge_input == 4){
-        for (int i = 127; i < 255; i++){
-
-             for (int j = 127; j < 255; j++){
+    }else if (enlarge_input == 4){
+        for (int i = 127; i < 256; i++){
+             for (int j = 128; j < 256; j++){
                  for (int k = 0; k < RGB; k++){
                  image[2 * i][2 * j][k] = image[i][j][k];
                  image[2 * i][2 * j + 1][k] = image[i][j][k];
@@ -331,8 +316,7 @@ void mirrorImage(){
                     x+=(SIZE/2);
             }
         }
-    }
-    else if (choice == 2){
+    }else if (choice == 2){
         int y = (SIZE/2);
         for (int i = 0; i < SIZE; i++) {
             for (int j = (SIZE/2); j <SIZE; j++) {
@@ -345,8 +329,7 @@ void mirrorImage(){
                     y+=(SIZE/2);
             }
         }
-    }
-    else if (choice == 3){
+    }else if (choice == 3){
         for (int i = 0; i < (SIZE/2); i++){
             for (int j = 0; j < SIZE; j++){
                 for (int k =0; k< RGB; k++){
@@ -356,8 +339,7 @@ void mirrorImage(){
             }
             x--;
         }
-    }
-    else if (choice == 4){
+    }else if (choice == 4){
         int z =127;
         for (int i = (SIZE/2); i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
@@ -428,8 +410,7 @@ void shuffleImage(){
                 }
             }
         }
-    }
-    if (qrt1_pos == 2){
+    }else if (qrt1_pos == 2){
         for (int i = 0, x = 0; i < SIZE/2; i++, x++){
             for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
                 for (int k = 0; k < RGB; k++){
@@ -437,8 +418,7 @@ void shuffleImage(){
                 }
             }
         }
-    }
-    if (qrt1_pos == 3){
+    }else if (qrt1_pos == 3){
         for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
             for (int j = 0, y = 0; j < SIZE/2; j++, y++){
                 for (int k = 0; k < RGB; k++){
@@ -446,8 +426,7 @@ void shuffleImage(){
                 }
             }
         }
-    }
-    if (qrt1_pos == 4){
+    }else if (qrt1_pos == 4){
         for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
              for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
                 for (int k = 0; k < RGB; k++){
@@ -465,8 +444,7 @@ void shuffleImage(){
                 }
             }
         }
-    }
-    if (qrt2_pos == 2){
+    }else if (qrt2_pos == 2){
         for (int i = 0, x = 0; i < SIZE/2; i++, x++){
             for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
                 for (int k = 0; k < RGB; k++){
@@ -474,8 +452,7 @@ void shuffleImage(){
                 }
             }
         }
-    }
-    if (qrt2_pos == 3){
+    }else if (qrt2_pos == 3){
         for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
             for (int j = 0, y = 0; j < SIZE/2; j++, y++){
                 for (int k = 0; k < RGB; k++){
@@ -483,8 +460,7 @@ void shuffleImage(){
                 }
             }
         }
-    }
-    if (qrt2_pos == 4){
+    }else if (qrt2_pos == 4){
         for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
              for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
                 for (int k = 0; k < RGB; k++){
@@ -502,8 +478,7 @@ void shuffleImage(){
                 }
             }
         }
-    }
-    if (qrt3_pos == 2){
+    }else if (qrt3_pos == 2){
         for (int i = 0, x = 0; i < SIZE/2; i++, x++){
             for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
                 for (int k = 0; k < RGB; k++){
@@ -511,8 +486,7 @@ void shuffleImage(){
                 }
             }
         }
-    }
-    if (qrt3_pos == 3){
+    }else if (qrt3_pos == 3){
         for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
             for (int j = 0, y = 0; j < SIZE/2; j++, y++){
                 for (int k = 0; k < RGB; k++){
@@ -520,8 +494,7 @@ void shuffleImage(){
                 }
             }
         }
-    }
-    if (qrt3_pos == 4){
+    }else if (qrt3_pos == 4){
         for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
              for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
                 for (int k = 0; k < RGB; k++){
@@ -539,8 +512,7 @@ void shuffleImage(){
                 }
             }
         }
-    }
-    if (qrt4_pos == 2){
+    }else if (qrt4_pos == 2){
         for (int i = 0, x = 0; i < SIZE/2; i++, x++){
             for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
                 for (int k = 0; k < RGB; k++){
@@ -548,8 +520,7 @@ void shuffleImage(){
                 }
             }
         }
-    }
-    if (qrt4_pos == 3){
+    }else if (qrt4_pos == 3){
         for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
             for (int j = 0, y = 0; j < SIZE/2; j++, y++){
                 for (int k = 0; k < RGB; k++){
@@ -557,8 +528,7 @@ void shuffleImage(){
                 }
             }
         }
-    }
-    if (qrt4_pos == 4){
+    }else if (qrt4_pos == 4){
         for (int i = SIZE/2, x = 0; i < SIZE; i++, x++){
              for (int j = SIZE/2, y = 0; j < SIZE; j++, y++){
                 for (int k = 0; k < RGB; k++){
@@ -688,7 +658,7 @@ int main(){
         cout << "\nInvalid input" << endl;
     }
     main();
-
+    return 0;
 }
 
 
