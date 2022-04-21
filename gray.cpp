@@ -1,14 +1,14 @@
 // Program: Ass3.cpp
 // Purpose: Demonstrate use of bmplip for handling
-//          bmp colored and grayscale images
+//          bmp grayscale images
 //          Program load a gray image and store in another file
 //          12 Filters
 // Author1:  Ayman Ashraf , 20210079 , A
 // Author2:  Malek Khaled Mohammed, 20210320 , A
 // Author3:  Ammar Ayman Mustafa, 20210253 , A
-// Section : S11,12
-// Date:    20 April 2022
-// Version: 3.0
+// Section: S11,12
+// Date:    21 April 2022
+// Version: 3.2
 
 #include <iostream>
 #include <fstream>
@@ -161,11 +161,6 @@ void rotateImage(){
             }
         }
     }
-
-    else{
-        cout << "Invalid input\n";
-        rotateImage();
-    }
 }
 
 // Darken and Lighten Image - Filter
@@ -195,8 +190,9 @@ void detectImageEdges(){
         }
     }
     multiTask();
-    invertImage2();
+    invertImage();
 }
+
 
 //Enlarge Image - Filter
 void enlargeImage(){
@@ -262,10 +258,6 @@ void enlargeImage(){
          }
     }
 
-    else {
-        cout << "Invalid Input";
-        enlargeImage();
-    }
 }
 
 // Shrink Image - Filter
@@ -521,7 +513,8 @@ int main(){
     if (loaded == 0)
         loadImage();
 
-    cout << "1- Black and White Image\n"
+    cout << " \n"
+            "1- Black and White Image\n"
             "2- Invert Image\n"
             "3- Merge Images\n"
             "4- Flip Image\n"
@@ -534,60 +527,75 @@ int main(){
             "b- Shuffle Image\n"
             "c- Blur Image\n"
             "0- Save The image to a file\n";
+    cout << "Please Enter The Number Of Your Desired Filter: ";
     cin >> choice;
 
     if (choice == '1'){
         blackAndWhite();
         multiTask();
-        cout << "Black and White Image Filter is Done"<< endl;
+        cout << " " << endl;
+        cout << "<Black and White Image Filter is Done>"<< endl;
     }else if(choice == '2'){
         invertImage();
         multiTask();
-        cout << "Invert Image Filter is Done"<< endl;
+        cout << " " << endl;
+        cout << "<Invert Image Filter is Done>"<< endl;
     }else if (choice == '3'){
         mergeImages();
         multiTask();
-        cout << "Merge Images Filter is Done"<< endl;
+        cout << " " << endl;
+        cout << "<Merge Images Filter is Done>"<< endl;
     }else if (choice == '4'){
         flipImage();
         multiTask();
-        cout << "Flip Image Filter is Done"<< endl;
+        cout << " " << endl;
+        cout << "<Flip Image Filter is Done>"<< endl;
     }else if (choice == '5'){
         rotateImage();
         multiTask();
-        cout << "Rotate Image Filter is Done" << endl;
+        cout << " " << endl;
+        cout << "<Rotate Image Filter is Done>" << endl;
     }else if (choice == '6'){
         darkenAndLightenImage();
         multiTask();
-        cout << "Darken and Lighten Image Filter is Done"<< endl;
+        cout << " " << endl;
+        cout << "<Darken and Lighten Image Filter is Done>"<< endl;
     }else if (choice == '7'){
         detectImageEdges();
         multiTask();
-        cout << "Detect Image Edges Filter is Done" << endl;
+        cout << " " << endl;
+        cout << "<Detect Image Edges Filter is Done>" << endl;
     }else if (choice == '8'){
         enlargeImage();
         multiTask();
-        cout << "Enlarge Image Filter is Done" << endl;
+        cout << " " << endl;
+        cout << "<Enlarge Image Filter is Done>" << endl;
     }else if (choice == '9'){
         shrinkImage();
         multiTask();
-        cout << "Shrink Image Filter is Done" << endl;
+        cout << " " << endl;
+        cout << "<Shrink Image Filter is Done>" << endl;
     }else if (choice == 'a'){
         mirrorImage();
         multiTask();
-        cout << "Mirror 1/2 Image Filter is Done"<< endl;
+        cout << " " << endl;
+        cout << "<Mirror 1/2 Image Filter is Done>"<< endl;
     }else if (choice == 'b'){
         shuffleImage();
         multiTask();
-        cout << "Shuffle Image Filter is Done" << endl;
+        cout << " " << endl;
+        cout << "<Shuffle Image Filter is Done>" << endl;
     }else if (choice == 'c'){
         blurImage();
         multiTask();
-        cout << "Blur Image Filter is Done" << endl;
+        cout << " " << endl;
+        cout << "<Blur Image Filter is Done>" << endl;
     }else if (choice == '0'){
         saveImage();
         multiTask();
-        cout << "Goodbye";
+        cout << " " << endl;
+        cout << "<Image Saved>" << endl;
+        cout << "<Thank You For Using Our Program>";
         return 1;
     }else{
         cout << "\nInvalid input" << endl;
