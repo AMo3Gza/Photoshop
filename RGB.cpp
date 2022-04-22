@@ -3,9 +3,9 @@
 //          bmp colored images
 //          Program load a colored image and store in another file
 //          12 Filters
-// Author1:  Ayman Ashraf , 20210079 , A
-// Author2:  Malek Khaled Mohammed, 20210320 , A
-// Author3:  Ammar Ayman Mustafa, 20210253 , A
+// Author1:  Ayman Ashraf, 20210079, A
+// Author2:  Malek Khaled Mohammed, 20210320, A
+// Author3:  Ammar Ayman Mustafa, 20210253, A
 // Section: S11,12
 // Date:    21 April 2022
 // Version: 3.2
@@ -669,6 +669,7 @@ int main(){
         cout << "  " << endl;
         cout << "<Image Saved>" << endl;
         cout << "<Thank You For Using Our Program>";
+        cout << " " << endl;
         return 1;
     }else{
         cout << "\nInvalid input" << endl;
