@@ -247,6 +247,22 @@ void shrinkImage(){
             "2- 1/2\n"
             "3- 1/3" << endl;
     cin >> choice;
+    for (int i = 0; i < SIZE; ++i) {
+        for (int j = 0; j < SIZE; ++j) {
+            if (choice == 2){
+                if (i > 127 || j > 127)
+                    newImage[i][j] = 255;
+            }
+            if (choice == 3){
+                if (i > 85 || j > 85)
+                    newImage[i][j] = 255;
+            }
+            if (choice == 1){
+                if (i > 63 || j > 63)
+                    newImage[i][j] = 255;
+            }
+        }
+    }
 
     if (choice == 1)
         choice += 3;
