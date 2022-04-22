@@ -3,9 +3,9 @@
 //          bmp grayscale images
 //          Program load a gray image and store in another file
 //          12 Filters
-// Author1:  Ayman Ashraf, 20210079, A
-// Author2:  Malek Khaled Mohammed, 20210320, A
-// Author3:  Ammar Ayman Mustafa, 20210253, A
+// Author1: Ayman Ashraf, 20210079, A
+// Author2: Malek Khaled Mohammed, 20210320, A
+// Author3: Ammar Ayman Mustafa, 20210253, A
 // Section: S11,12
 // Date:    22 April 2022
 // Version: 3.3
